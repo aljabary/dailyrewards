@@ -1,0 +1,91 @@
+{
+    "name": "laravel/laravel",
+    "description": "The Laravel Framework.",
+    "keywords": ["framework", "laravel"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": "^7.1.3",
+        "barryvdh/laravel-dompdf": "^0.8.3",
+        "crocodicstudio/dokularavel": "^1.6",
+        "fideloper/proxy": "^4.0",
+        "geoip2/geoip2": "~2.0",
+        "hashids/hashids": "^3.0",
+        "jaeger/g-http": "^1.1",
+        "jaeger/phpquery-single": "^0.9",
+        "jaeger/querylist-rule-google": "^4.0",
+        "laravel/cashier": "~7.0",
+        "laravel/framework": "5.6.*",
+        "laravel/socialite": "^3.1",
+        "laravel/tinker": "^1.0",
+        "otezz/doku-php": "^1.0",
+        "php-ai/php-ml": "^0.6.2",
+        "pusher/pusher-php-server": "~3.0",
+        "spatie/laravel-analytics": "^3.6",
+        "tightenco/collect": "^5"
+    },
+    "require-dev": {
+        "filp/whoops": "^2.0",
+        "fzaninotto/faker": "^1.4",
+        "mockery/mockery": "^1.0",
+        "nunomaduro/collision": "^2.0",
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "classmap": [
+            "database/seeds",
+			"app/Model",
+			"app/PhpQuery",
+			"app/Jaeger",
+			"app/Engine",
+            "database/factories"
+        ],
+        "psr-4": {
+            "App\\": "app/",
+            "App\\Model\\": "app/Model/",
+			"Jaeger\\":"app/Jaeger",
+            "QL\\": "app/PhpQuery/",
+            "Engine\\": "app/Engine/",
+			 "Intervention\\Image\\": "app/intervention/image/src/Intervention/Image"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+					"providers": [
+					"Intervention\\Image\\ImageServiceProvider"
+					],
+				"aliases": {
+					"Image": "Intervention\\Image\\Facades\\Image"
+				},
+				"dont-discover": [
+				]				
+			},
+		 "branch-alias": {
+            "dev-master": "2.4-dev"
+        }
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
